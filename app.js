@@ -86,5 +86,8 @@ function bet() {
 }
 
 function drawCard() {
+    let randomIndex = Math.floor(Math.random() * deck.length);
+    let card = deck[randomIndex];
+    console.log(`Card: ${card}`);
     console.log(`Draw card`);
 }
