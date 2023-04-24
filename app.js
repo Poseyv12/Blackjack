@@ -57,14 +57,15 @@ function init() {
 }
 
 function render() {
-    console.log("rendered");
+    dealerScore = calculateHand(dealerHand);
+    playerScore = calculateHand(playerHand)
+    console.log("Dealer hand: ", dealerHand)
     console.log("player hand is: ", playerHand)
-    console.log("deck after draw", deck)
     console.log("player total is: ", calculateHand(playerHand))
+    console.log("dealer total is: ", calculateHand(dealerHand))
 }
 
 function hit() {
-    console.log("hit");
     drawCard(playerHand)
     if (isBust(playerHand)) {
         gameOver = true;
@@ -74,28 +75,47 @@ function hit() {
 }
 
 function stand(){
-    console.log("stand");
+    // Dealer draws cards until their hand value is at least 17
+	while (calculateHand(dealerHand) < 17) {
+		drawCard(dealerHand);
+    }
     render();
+    if (isBust(dealerHand)) {
+        console.log("Dealer busts! You win!")
+        message.innerText = "Dealer busts! You win!"
+        
+    } else if (dealerScore > playerScore) {
+        console.log("dealer wins!");
+        message.innerText = "Dealer wins!"
+		
+    } else if (dealerScore < playerScore) {
+        console.log("you win!");
+        message.innerText = "You win!";
+    } else {
+        console.log("Push! Its a tie.");
+        message.innerText = "Push! Its a tie.";
+    }
+   
+	// Set game over
+    gameOver = true;
 }
 
 function playAgain() {
     init();
-    console.log("play again");
-    render();
 }
 
 function bet() {
     drawCard(playerHand)
     drawCard(playerHand)
-    render()
+    drawCard(dealerHand);
+    
     if (isBlackjack(playerHand)) {
         console.log("blackjack");
         message.innerText = "Blackjack! You win!";
         gameOver = true;
 	}
-
+    render()
 }
-
 
 function drawCard(hand) {
     // generate a random index between 0 and the length of the deck array
