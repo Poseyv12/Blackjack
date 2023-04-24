@@ -59,13 +59,18 @@ function init() {
 function render() {
     console.log("rendered");
     console.log("player hand is: ", playerHand)
+    console.log("deck after draw", deck)
     console.log("player total is: ", calculateHand(playerHand))
 }
 
 function hit() {
     console.log("hit");
-    render();
     drawCard(playerHand)
+    if (isBust(playerHand)) {
+        gameOver = true;
+        console.log("Bust! Dealer wins.");
+    }
+    render();
 }
 
 function stand(){
@@ -83,6 +88,11 @@ function bet() {
     drawCard(playerHand)
     drawCard(playerHand)
     render()
+    if (isBlackjack(playerHand)) {
+        console.log("blackjack");
+        message.innerText = "Blackjack! You win!";
+        gameOver = true;
+	}
 
 }
 
@@ -125,3 +135,12 @@ function calculateHand(hand) {
   return sum;
 }
 
+// Define function to check if hand is a Blackjack
+function isBlackjack(hand) {
+	return hand.length === 2 && calculateHand(hand) === 21;
+}
+
+// Define function to check if hand is bust
+function isBust(hand) {
+	return calculateHand(hand) > 21;
+}
