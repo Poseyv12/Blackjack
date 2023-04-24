@@ -42,3 +42,49 @@ playAgainButton.addEventListener("click", playAgain);
 betButton.addEventListener("click", bet);
 
 /*----- functions -----*/
+
+init();
+function init() { 
+    playerHand = []
+    dealerHand = []
+    gameOver = "";
+    playerScore = 0;
+    dealerScore = 0;
+    betPlaced = false;
+    dealerBalance = 0;
+    message.innerText = "PLACE BET TO START GAME";
+    render();
+}
+
+function render() {
+    console.log("rendered");
+}
+
+function hit() {
+    console.log("hit");
+    render();
+    drawCard()
+}
+
+function stand(){
+    console.log("stand");
+    render();
+}
+
+function playAgain() {
+    init();
+    console.log("play again");
+    render();
+}
+
+function bet() {
+    drawCard()
+    drawCard()
+    console.log("bet")
+    render()
+
+}
+
+function drawCard() {
+    console.log(`Draw card`);
+}
