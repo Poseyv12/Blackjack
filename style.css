@@ -1,3 +1,70 @@
-body{
-    background-color: rgb(255, 255, 255);
+body {
+    font-size: 20px;
+	font-family: 'Poppins', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+}
+#buttons-area{
+    width: 500px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+#game-area {
+	background-size: cover;
+    width: 1300px;
+    height: 800px;
+	margin: 0 auto;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color:rgb(255, 255, 255);
+    border-radius: 20px;
+}
+
+#player-area, #dealer-area {
+    background-position: center;
+    width: 375px;
+    height: 550px;
+    background-color: rgb(204, 204, 204);
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+	margin: 30px;
+    border: 1px solid black;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+#player-cards, #dealer-cards {
+    font-size: 75px;
+	height: 120px;
+	
+	white-space: nowrap;
+}
+
+#player-score, #dealer-score {
+	font-size: 40px;
+	font-weight: bold;
+}
+
+#hit-button, #stand-button, #bet-button, #all-in-bet-button, #play-again-button {
+	display: flex;
+    width: 200px;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+	margin: 40px auto;
+	font-size: 20px;
+	padding: 10px;
+}
+
+#message{
+    font-size: 50px;
+    margin-bottom: 40px;
 }
