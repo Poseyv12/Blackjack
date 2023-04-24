@@ -50,9 +50,9 @@ function init() {
     gameOver = "";
     playerScore = 0;
     dealerScore = 0;
-    betPlaced = false;
     dealerBalance = 0;
     message.innerText = "PLACE BET TO START GAME";
+    deck.splice(0, deck.length, "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A");
     render();
 }
 
