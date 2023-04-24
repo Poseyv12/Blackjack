@@ -59,6 +59,11 @@ function init() {
 function render() {
     dealerScore = calculateHand(dealerHand);
     playerScore = calculateHand(playerHand)
+    playerCards.innerText = playerHand 
+    dealerCards.innerText = dealerHand
+    playerCash.innerText = `PLAYER BALANCE: $${playerBalance}`
+    playerScoreDisplay.textContent = `Score: ${playerScore}`;
+	dealerScoreDisplay.textContent = `Score: ${dealerScore}`;
     console.log("Dealer hand: ", dealerHand)
     console.log("player hand is: ", playerHand)
     console.log("player total is: ", calculateHand(playerHand))
@@ -69,6 +74,7 @@ function hit() {
     drawCard(playerHand)
     if (isBust(playerHand)) {
         gameOver = true;
+        message.innerText = "Bust! Dealer wins.";
         console.log("Bust! Dealer wins.");
     }
     render();
