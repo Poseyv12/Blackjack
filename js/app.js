@@ -54,8 +54,10 @@ betButton.addEventListener("click", function(){
 
 init();
 function init() { 
-    dealerArea.style.animation = "none"
-    playerArea.style.animation = "none"
+    playerCash.style.border = "white"
+    playAgainButton.style.animation ="none";
+    dealerArea.style.animation = "none";
+    playerArea.style.animation = "none";
     playerArea.style.borderColor = "black";
     dealerArea.style.borderColor = "black";
     hitButton.disabled = true;
@@ -236,9 +238,11 @@ function isGameOver() {
 
 function winColor() {
     playerArea.style.animation = "flash .2s linear infinite";
+    playAgainButton.style.animation = "buttonFlash 1s linear infinite";
     
 }
 
 function dealerWinColor() {
     dealerArea.style.animation = "flash .2s linear infinite"; 
+    playAgainButton.style.animation = "buttonFlash 1s linear infinite";
 }
