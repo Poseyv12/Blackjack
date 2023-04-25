@@ -38,7 +38,7 @@ body {
 }
 
 @keyframes flash {
-    0% { border-color: rgb(255, 255, 255); }
+    0% { border-color: yellow; }
     100% { border-color: green; }
 }
 
@@ -54,7 +54,7 @@ body {
 	font-weight: bold;
 }
 
-#buttons-area{
+#buttons-area {
     width: 900px;
     display: flex;
     justify-content: space-evenly;
@@ -72,7 +72,7 @@ body {
 }
 
 
-#message{
+#message {
     font-size: 50px;
     margin-bottom: 40px;
 }

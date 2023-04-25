@@ -236,10 +236,9 @@ function isGameOver() {
 
 function winColor() {
     playerArea.style.animation = "flash .2s linear infinite";
-    playerArea.style.borderColor = "green";
+    
 }
 
 function dealerWinColor() {
-    dealerArea.style.animation = "flash .2s linear infinite";
-    dealerArea.style.borderColor = "green";
+    dealerArea.style.animation = "flash .2s linear infinite"; 
 }
