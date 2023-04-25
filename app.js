@@ -39,7 +39,9 @@ const message = document.getElementById("message")
 hitButton.addEventListener("click", hit);
 standButton.addEventListener("click", stand);
 playAgainButton.addEventListener("click", playAgain);
-betButton.addEventListener("click", bet);
+betButton.addEventListener("click", function(){
+    bet(10)
+});
 
 /*----- functions -----*/
 
@@ -71,7 +73,9 @@ function render() {
 }
 
 function hit() {
+    //draw card
     drawCard(playerHand)
+    //check for bust
     if (isBust(playerHand)) {
         gameOver = true;
         message.innerText = "Bust! Dealer wins.";
@@ -110,11 +114,25 @@ function playAgain() {
     init();
 }
 
-function bet() {
+function bet(bet) {
     drawCard(playerHand)
     drawCard(playerHand)
     drawCard(dealerHand);
-    
+    //check to see if player balance is enough for bet.
+    if (bet > playerBalance) {
+        betButton.disabled = true;
+        hitButton.disabled = true;
+        standButton.disabled = true;
+        
+        message.innerText = "Not enough cash to place this bet.";
+        console.log("Not enough cash to place this bet.")
+        return;
+    } else {
+        message.innerText = "Game in progress";
+        playerBalance -= bet;
+        console.log(`Bet of ${bet} placed successfully. Remaining balance: ${playerBalance}`);
+    }
+
     if (isBlackjack(playerHand)) {
         console.log("blackjack");
         message.innerText = "Blackjack! You win!";
