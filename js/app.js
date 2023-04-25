@@ -34,6 +34,11 @@ const playAgainButton = document.getElementById("play-again-button");
 const message = document.getElementById("message")
 
 // Define game Audio
+const hitAudio = new Audio("sounds/hit.wav");
+const winAudio = new Audio("sounds/win.wav");
+const betAudio = new Audio("sounds/bet.wav");
+const loseAudio = new Audio("sounds/lose.wav");
+const tieAudio = new Audio("sounds/tie.wav");
 
 // Event listeners for buttons
 hitButton.addEventListener("click", hit);
@@ -80,11 +85,12 @@ function hit() {
     drawCard(playerHand)
     //check for bust
     if (isBust(playerHand)) {
+        loseAudio.play();
         gameOver = true;
         message.innerText = "Bust! Dealer wins.";
         console.log("Bust! Dealer wins.");
-
     }
+    hitAudio.play()
     render();
 }
 
@@ -98,25 +104,27 @@ function stand(){
     render();
 
     if (isBust(dealerHand)) {
+        winAudio.play();
         playerBalance += 20;
         console.log("Dealer busts! You win!")
         message.innerText = "Dealer busts! You win!"
         
     } else if (dealerScore > playerScore) {
+        loseAudio.play();
         console.log("dealer wins!");
         message.innerText = "Dealer wins!"
 		
     } else if (dealerScore < playerScore) {
+        winAudio.play();
         playerBalance += 20;
         console.log("you win!");
         message.innerText = "You win!";
     } else {
+        tieAudio.play();
         playerBalance += 10;
         console.log("Push! Its a tie.");
         message.innerText = "Push! Its a tie.";
     }
-	
-    
 }
 
 function playAgain() {
@@ -140,12 +148,14 @@ function bet(bet) {
         console.log("Not enough cash to place this bet.")
         return;
     } else {
+        betAudio.play();
         message.innerText = "Game in progress";
         playerBalance -= bet;
         console.log(`Bet of ${bet} placed successfully. Remaining balance: ${playerBalance}`);
     }
 
     if (isBlackjack(playerHand)) {
+        winAudio.play();
         console.log("blackjack");
         message.innerText = "Blackjack! You win!";
         gameOver = true;
