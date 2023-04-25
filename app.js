@@ -80,6 +80,7 @@ function hit() {
         gameOver = true;
         message.innerText = "Bust! Dealer wins.";
         console.log("Bust! Dealer wins.");
+        
     }
     render();
 }
@@ -91,6 +92,7 @@ function stand(){
     }
     render();
     if (isBust(dealerHand)) {
+        playerBalance += 20;
         console.log("Dealer busts! You win!")
         message.innerText = "Dealer busts! You win!"
         
@@ -99,9 +101,11 @@ function stand(){
         message.innerText = "Dealer wins!"
 		
     } else if (dealerScore < playerScore) {
+        playerBalance += 20;
         console.log("you win!");
         message.innerText = "You win!";
     } else {
+        playerBalance += 10;
         console.log("Push! Its a tie.");
         message.innerText = "Push! Its a tie.";
     }
@@ -115,6 +119,7 @@ function playAgain() {
 }
 
 function bet(bet) {
+    //deal 2 cards to player and one to the dealer
     drawCard(playerHand)
     drawCard(playerHand)
     drawCard(dealerHand);
@@ -137,6 +142,7 @@ function bet(bet) {
         console.log("blackjack");
         message.innerText = "Blackjack! You win!";
         gameOver = true;
+        playerBalance += bet*2;
 	}
     render()
 }
