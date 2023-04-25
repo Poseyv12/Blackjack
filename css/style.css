@@ -34,6 +34,12 @@ body {
     border: 5px solid black;
     padding: 20px;
     border-radius: 20px;
+    
+}
+
+@keyframes flash {
+    0% { border-color: rgb(255, 255, 255); }
+    100% { border-color: green; }
 }
 
 #player-cards, #dealer-cards {

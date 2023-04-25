@@ -54,6 +54,8 @@ betButton.addEventListener("click", function(){
 
 init();
 function init() { 
+    dealerArea.style.animation = "none"
+    playerArea.style.animation = "none"
     playerArea.style.borderColor = "black";
     dealerArea.style.borderColor = "black";
     hitButton.disabled = true;
@@ -232,10 +234,12 @@ function isGameOver() {
     }
 }
 
-function winColor(){
+function winColor() {
+    playerArea.style.animation = "flash .2s linear infinite";
     playerArea.style.borderColor = "green";
 }
 
 function dealerWinColor() {
+    dealerArea.style.animation = "flash .2s linear infinite";
     dealerArea.style.borderColor = "green";
 }
