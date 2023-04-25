@@ -7,11 +7,6 @@ body {
     flex-direction: column;
     height: 100vh;
 }
-#buttons-area{
-    width: 500px;
-    display: flex;
-    justify-content: space-evenly;
-}
 
 #game-area {
 	background-size: cover;
@@ -36,9 +31,9 @@ body {
     flex-direction: column;
     flex-wrap: wrap;
 	margin: 30px;
-    border: 1px solid black;
+    border: 5px solid black;
     padding: 20px;
-    border-radius: 10px;
+    border-radius: 20px;
 }
 
 #player-cards, #dealer-cards {
@@ -53,6 +48,12 @@ body {
 	font-weight: bold;
 }
 
+#buttons-area{
+    width: 900px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
 #hit-button, #stand-button, #bet-button, #all-in-bet-button, #play-again-button {
 	display: flex;
     width: 200px;
@@ -63,6 +64,7 @@ body {
 	font-size: 20px;
 	padding: 10px;
 }
+
 
 #message{
     font-size: 50px;

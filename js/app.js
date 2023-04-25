@@ -29,9 +29,11 @@ const dealerScoreDisplay = document.getElementById("dealer-score");
 const hitButton = document.getElementById("hit-button");
 const standButton = document.getElementById("stand-button");
 const betButton = document.getElementById('bet-button');
-const allInBetButton = document.getElementById("all-in-bet-button")
+const allInBetButton = document.getElementById("all-in-bet-button");
 const playAgainButton = document.getElementById("play-again-button");
-const message = document.getElementById("message")
+const message = document.getElementById("message");
+const dealerArea = document.getElementById("dealer-area");
+const playerArea = document.getElementById("player-area");
 
 // Define game Audio
 const hitAudio = new Audio("sounds/hit.wav");
@@ -45,17 +47,19 @@ hitButton.addEventListener("click", hit);
 standButton.addEventListener("click", stand);
 playAgainButton.addEventListener("click", playAgain);
 betButton.addEventListener("click", function(){
-    bet(10)
+    bet(10);
 });
 
 /*----- functions -----*/
 
 init();
 function init() { 
+    playerArea.style.borderColor = "black";
+    dealerArea.style.borderColor = "black";
     hitButton.disabled = true;
     standButton.disabled = true;
-    playerHand = []
-    dealerHand = []
+    playerHand = [];
+    dealerHand = [];
     gameOver = "";
     playerScore = 0;
     dealerScore = 0;
@@ -68,29 +72,30 @@ function init() {
 function render() {
     isGameOver()
     dealerScore = calculateHand(dealerHand);
-    playerScore = calculateHand(playerHand)
-    playerCards.innerText = playerHand 
-    dealerCards.innerText = dealerHand
+    playerScore = calculateHand(playerHand);
+    playerCards.innerText = playerHand;
+    dealerCards.innerText = dealerHand;
     playerCash.innerText = `PLAYER BALANCE: $${playerBalance}`
     playerScoreDisplay.textContent = `Score: ${playerScore}`;
 	dealerScoreDisplay.textContent = `Score: ${dealerScore}`;
-    console.log("Dealer hand: ", dealerHand)
-    console.log("player hand is: ", playerHand)
+    console.log("Dealer hand: ", dealerHand);
+    console.log("player hand is: ", playerHand);
     console.log("player total is: ", calculateHand(playerHand))
     console.log("dealer total is: ", calculateHand(dealerHand))
 }
 
 function hit() {
     //draw card
-    drawCard(playerHand)
+    drawCard(playerHand);
     //check for bust
     if (isBust(playerHand)) {
         loseAudio.play();
+        dealerWinColor();
         gameOver = true;
         message.innerText = "Bust! Dealer wins.";
         console.log("Bust! Dealer wins.");
     }
-    hitAudio.play()
+    hitAudio.play();
     render();
 }
 
@@ -104,17 +109,20 @@ function stand(){
     render();
 
     if (isBust(dealerHand)) {
+        winColor();
         winAudio.play();
         playerBalance += 20;
-        console.log("Dealer busts! You win!")
-        message.innerText = "Dealer busts! You win!"
+        console.log("Dealer busts! You win!");
+        message.innerText = "Dealer busts! You win!";
         
     } else if (dealerScore > playerScore) {
+        dealerWinColor();
         loseAudio.play();
         console.log("dealer wins!");
-        message.innerText = "Dealer wins!"
+        message.innerText = "Dealer wins!";
 		
     } else if (dealerScore < playerScore) {
+        winColor();
         winAudio.play();
         playerBalance += 20;
         console.log("you win!");
@@ -133,8 +141,8 @@ function playAgain() {
 
 function bet(bet) {
     //deal 2 cards to player and one to the dealer
-    drawCard(playerHand)
-    drawCard(playerHand)
+    drawCard(playerHand);
+    drawCard(playerHand);
     drawCard(dealerHand);
     hitButton.disabled = false;
     standButton.disabled = false;
@@ -156,6 +164,7 @@ function bet(bet) {
 
     if (isBlackjack(playerHand)) {
         winAudio.play();
+        winColor();
         console.log("blackjack");
         message.innerText = "Blackjack! You win!";
         gameOver = true;
@@ -221,4 +230,12 @@ function isGameOver() {
     } else {
         betButton.disabled = false;
     }
+}
+
+function winColor(){
+    playerArea.style.borderColor = "green";
+}
+
+function dealerWinColor() {
+    dealerArea.style.borderColor = "green";
 }
