@@ -202,6 +202,7 @@ function isBust(hand) {
 	return calculateHand(hand) > 21;
 }
 
+//check if game is over
 function isGameOver() {
     if (gameOver === true) {
         hitButton.disabled = true;
