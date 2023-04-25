@@ -47,6 +47,8 @@ betButton.addEventListener("click", function(){
 
 init();
 function init() { 
+    hitButton.disabled = true;
+    standButton.disabled = true;
     playerHand = []
     dealerHand = []
     gameOver = "";
@@ -59,6 +61,7 @@ function init() {
 }
 
 function render() {
+    isGameOver()
     dealerScore = calculateHand(dealerHand);
     playerScore = calculateHand(playerHand)
     playerCards.innerText = playerHand 
@@ -80,7 +83,7 @@ function hit() {
         gameOver = true;
         message.innerText = "Bust! Dealer wins.";
         console.log("Bust! Dealer wins.");
-        
+
     }
     render();
 }
@@ -90,7 +93,10 @@ function stand(){
 	while (calculateHand(dealerHand) < 17) {
 		drawCard(dealerHand);
     }
+
+    gameOver = true;
     render();
+
     if (isBust(dealerHand)) {
         playerBalance += 20;
         console.log("Dealer busts! You win!")
@@ -109,9 +115,8 @@ function stand(){
         console.log("Push! Its a tie.");
         message.innerText = "Push! Its a tie.";
     }
-   
-	// Set game over
-    gameOver = true;
+	
+    
 }
 
 function playAgain() {
@@ -123,6 +128,8 @@ function bet(bet) {
     drawCard(playerHand)
     drawCard(playerHand)
     drawCard(dealerHand);
+    hitButton.disabled = false;
+    standButton.disabled = false;
     //check to see if player balance is enough for bet.
     if (bet > playerBalance) {
         betButton.disabled = true;
@@ -193,4 +200,14 @@ function isBlackjack(hand) {
 // Define function to check if hand is bust
 function isBust(hand) {
 	return calculateHand(hand) > 21;
+}
+
+function isGameOver() {
+    if (gameOver === true) {
+        hitButton.disabled = true;
+        standButton.disabled = true;
+        betButton.disabled = true;
+    } else {
+        betButton.disabled = false;
+    }
 }
