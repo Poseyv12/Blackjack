@@ -7,6 +7,7 @@ body {
     align-items: center;
     flex-direction: column;
     height: 100vh;
+    
 }
 
 #game-area {
@@ -19,6 +20,7 @@ body {
     justify-content: space-evenly;
     align-items: center;
     border-radius: 20px;
+    z-index: -2;
 }
 
 #player-area, #dealer-area {
@@ -73,6 +75,31 @@ body {
     margin-bottom: 40px;
 }
 
+.container {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0);
+    z-index: -1;
+}
+
+.dollar {
+    position: absolute;
+    font-size: 40px;
+    color: #00ff00;
+    animation: fall 2s linear infinite;
+}
+
+@keyframes fall {
+    0% {
+        transform: translateY(-100%);
+    }
+    100% {
+        transform: translateY(2000%);
+    }
+}
+
 @keyframes buttonFlash {
     0% { background-color: rgb(255, 255, 255); }
     100% { background-color: rgb(129, 129, 129); }
@@ -85,3 +112,4 @@ body {
     0% { color: rgb(0, 0, 0); }
     100% { color: rgb(255, 255, 255); }
 }
+

@@ -15,7 +15,7 @@ let gameOver
 let playerScore
 let dealerScore 
 let betPlaced 
-let playerBet = 10
+let playerBet = 20
 let playerBalance = 100; // starting balance for the player
 let dealerBalance = 0; // starting balance for the dealer
 
@@ -55,6 +55,7 @@ betButton.addEventListener("click", function(){
 init();
 function init() { 
     //styles//
+    
     playerCash.style.animation = "none";
     playAgainButton.style.animation ="none";
     dealerArea.style.animation = "none";
@@ -71,6 +72,7 @@ function init() {
     dealerScore = 0;
     dealerBalance = 0;
     message.innerText = "PLACE BET TO START GAME";
+    // rest the deck
     deck.splice(0, deck.length, "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A");
     render();
 }
@@ -243,6 +245,7 @@ function isGameOver() {
 }
 
 function winColor() {
+    rain()
     playerCash.style.animation = "cashFlash .1s linear 20";
     playerArea.style.animation = "flash .1s linear 20";
     playAgainButton.style.animation = "buttonFlash 1s linear infinite";
@@ -253,3 +256,21 @@ function dealerWinColor() {
     dealerArea.style.animation = "flash .2s linear infinite"; 
     playAgainButton.style.animation = "buttonFlash 1s linear infinite";
 }
+
+function rain() {
+    let int = setInterval(function () {
+        const dollar = document.createElement("i");
+        dollar.classList.add("fa", "fa-dollar", "dollar");
+        const size = Math.random() * 50 + 10;
+        dollar.style.fontSize = size + "px";
+        const left = Math.random() * 100 + "%";
+        dollar.style.left = left;
+        document.querySelector(".container").appendChild(dollar);
+        setTimeout(function () {
+            clearInterval(int)
+            dollar.style.animation = "none"
+            dollar.style.display = "none"
+        }, 5000);
+    }, 400);
+}
+    
