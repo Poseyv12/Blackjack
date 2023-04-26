@@ -87,7 +87,7 @@ body {
 .dollar {
     position: absolute;
     font-size: 40px;
-    color: #00ff00;
+    color: #118C4F;
     animation: fall 2s linear infinite;
 }
 

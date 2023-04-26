@@ -256,7 +256,7 @@ function dealerWinColor() {
     dealerArea.style.animation = "flash .2s linear infinite"; 
     playAgainButton.style.animation = "buttonFlash 1s linear infinite";
 }
-
+// this function rains dollar signs each time its played
 function rain() {
     let int = setInterval(function () {
         // Create a new 'i' element 
