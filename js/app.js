@@ -15,7 +15,7 @@ let gameOver
 let playerScore
 let dealerScore 
 let betPlaced 
-
+let playerBet = 10
 let playerBalance = 100; // starting balance for the player
 let dealerBalance = 0; // starting balance for the dealer
 
@@ -28,7 +28,7 @@ const playerScoreDisplay = document.getElementById("player-score");
 const dealerScoreDisplay = document.getElementById("dealer-score");
 const hitButton = document.getElementById("hit-button");
 const standButton = document.getElementById("stand-button");
-const betButton = document.getElementById('bet-button');
+const betButton = document.querySelector(".bet-button");
 const allInBetButton = document.getElementById("all-in-bet-button");
 const playAgainButton = document.getElementById("play-again-button");
 const message = document.getElementById("message");
@@ -47,14 +47,15 @@ hitButton.addEventListener("click", hit);
 standButton.addEventListener("click", stand);
 playAgainButton.addEventListener("click", playAgain);
 betButton.addEventListener("click", function(){
-    bet(10);
+    bet(playerBet);
 });
 
 /*----- functions -----*/
 
 init();
 function init() { 
-    playerCash.style.border = "white"
+    //styles//
+    playerCash.style.animation = "none";
     playAgainButton.style.animation ="none";
     dealerArea.style.animation = "none";
     playerArea.style.animation = "none";
@@ -62,6 +63,7 @@ function init() {
     dealerArea.style.borderColor = "black";
     hitButton.disabled = true;
     standButton.disabled = true;
+    // -------- //
     playerHand = [];
     dealerHand = [];
     gameOver = "";
@@ -80,6 +82,7 @@ function render() {
     playerCards.innerText = playerHand;
     dealerCards.innerText = dealerHand;
     playerCash.innerText = `PLAYER BALANCE: $${playerBalance}`
+    dealerCash.innerText = `POT BALANCE: $${dealerBalance}`
     playerScoreDisplay.textContent = `Score: ${playerScore}`;
 	dealerScoreDisplay.textContent = `Score: ${dealerScore}`;
     console.log("Dealer hand: ", dealerHand);
@@ -115,7 +118,7 @@ function stand(){
     if (isBust(dealerHand)) {
         winColor();
         winAudio.play();
-        playerBalance += 20;
+        playerBalance += playerBet*2;
         console.log("Dealer busts! You win!");
         message.innerText = "Dealer busts! You win!";
         
@@ -128,15 +131,16 @@ function stand(){
     } else if (dealerScore < playerScore) {
         winColor();
         winAudio.play();
-        playerBalance += 20;
+        playerBalance += playerBet*2;
         console.log("you win!");
         message.innerText = "You win!";
     } else {
         tieAudio.play();
-        playerBalance += 10;
+        playerBalance += playerBet;
         console.log("Push! Its a tie.");
         message.innerText = "Push! Its a tie.";
     }
+    render();
 }
 
 function playAgain() {
@@ -162,6 +166,7 @@ function bet(bet) {
     } else {
         betAudio.play();
         message.innerText = "Game in progress";
+        dealerBalance += bet*2;
         playerBalance -= bet;
         console.log(`Bet of ${bet} placed successfully. Remaining balance: ${playerBalance}`);
     }
@@ -172,7 +177,8 @@ function bet(bet) {
         console.log("blackjack");
         message.innerText = "Blackjack! You win!";
         gameOver = true;
-        playerBalance += bet*2;
+        dealerBalance -= bet*2;
+        playerBalance += playerBet*2;
 	}
     render()
 }
@@ -237,7 +243,8 @@ function isGameOver() {
 }
 
 function winColor() {
-    playerArea.style.animation = "flash .2s linear infinite";
+    playerCash.style.animation = "cashFlash .1s linear 20";
+    playerArea.style.animation = "flash .1s linear 20";
     playAgainButton.style.animation = "buttonFlash 1s linear infinite";
     
 }
