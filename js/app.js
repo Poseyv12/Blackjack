@@ -259,13 +259,18 @@ function dealerWinColor() {
 
 function rain() {
     let int = setInterval(function () {
+        // Create a new 'i' element 
         const dollar = document.createElement("i");
         dollar.classList.add("fa", "fa-dollar", "dollar");
+        // Generate a random size for the dollar icon between 10px and 60px
         const size = Math.random() * 50 + 10;
         dollar.style.fontSize = size + "px";
+         // Generate a random left position for the dollar icon between 0% and 100%
         const left = Math.random() * 100 + "%";
         dollar.style.left = left;
+        // Append the dollar icon to an element with a class of 'container'
         document.querySelector(".container").appendChild(dollar);
+        //set animation duration
         setTimeout(function () {
             clearInterval(int)
             dollar.style.animation = "none"
