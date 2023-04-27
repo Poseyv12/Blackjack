@@ -183,6 +183,7 @@ function bet(bet) {
         playerBalance += playerBet*2;
 	}
     render()
+    betButton.disabled = true;
 }
 
 function drawCard(hand) {
@@ -190,9 +191,9 @@ function drawCard(hand) {
     let randomIndex = Math.floor(Math.random() * deck.length);
     // select a random card from the deck based on random index generated
     let card = deck[randomIndex];
-      // add card to hand
-      hand.push(card);
-      // take card out of the deck
+    // add card to hand
+    hand.push(card);
+    // take card out of the deck
     deck.splice(randomIndex, 1);
     console.log("card dealt ", card );
 }
