@@ -2,9 +2,9 @@
 The objective of Blackjack is to have a hand value of 21 or as close to 21 as possible without exceeding it. Face cards (Jack(J), Queen(Q), King(K)) have a value of 10 and Aces(A) can have a value of 1 or 11.
 
 ## Screenshots:
-![screenShot1](imgs/screenShot1.pngscreenShot1.png)
-![screenShot2](imgs/screenShot2.pngscreenShot1.png)
-![screenShot3](imgs/screenShot3.pngscreenShot1.png)
+![screenShot1](imgs/screenShot1.png)
+![screenShot2](imgs/screenShot2.png)
+![screenShot3](imgs/screenShot3.png)
 
 ## Technologies Used: 
 JavaScript, HTML, CSS
