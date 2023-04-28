@@ -15,7 +15,7 @@ let gameOver
 let playerScore
 let dealerScore 
 let betPlaced 
-let playerBet = 20
+let playerBet = 10;
 let playerBalance = 100; // starting balance for the player
 let dealerBalance = 0; // starting balance for the dealer
 
@@ -55,7 +55,6 @@ betButton.addEventListener("click", function(){
 init();
 function init() { 
     //styles//
-    
     playerCash.style.animation = "none";
     playAgainButton.style.animation ="none";
     dealerArea.style.animation = "none";
@@ -87,10 +86,6 @@ function render() {
     dealerCash.innerText = `POT BALANCE: $${dealerBalance}`
     playerScoreDisplay.textContent = `Score: ${playerScore}`;
 	dealerScoreDisplay.textContent = `Score: ${dealerScore}`;
-    console.log("Dealer hand: ", dealerHand);
-    console.log("player hand is: ", playerHand);
-    console.log("player total is: ", calculateHand(playerHand))
-    console.log("dealer total is: ", calculateHand(dealerHand))
 }
 
 function hit() {
@@ -102,7 +97,6 @@ function hit() {
         dealerWinColor();
         gameOver = true;
         message.innerText = "Bust! Dealer wins.";
-        console.log("Bust! Dealer wins.");
     }
     hitAudio.play();
     render();
@@ -121,25 +115,21 @@ function stand(){
         winColor();
         winAudio.play();
         playerBalance += playerBet*2;
-        console.log("Dealer busts! You win!");
         message.innerText = "Dealer busts! You win!";
         
     } else if (dealerScore > playerScore) {
         dealerWinColor();
         loseAudio.play();
-        console.log("dealer wins!");
         message.innerText = "Dealer wins!";
 		
     } else if (dealerScore < playerScore) {
         winColor();
         winAudio.play();
         playerBalance += playerBet*2;
-        console.log("you win!");
         message.innerText = "You win!";
     } else {
         tieAudio.play();
         playerBalance += playerBet;
-        console.log("Push! Its a tie.");
         message.innerText = "Push! Its a tie.";
     }
     render();
@@ -161,22 +151,18 @@ function bet(bet) {
         betButton.disabled = true;
         hitButton.disabled = true;
         standButton.disabled = true;
-        
         message.innerText = "Not enough cash to place this bet.";
-        console.log("Not enough cash to place this bet.")
         return;
     } else {
         betAudio.play();
         message.innerText = "Game in progress";
         dealerBalance += bet*2;
         playerBalance -= bet;
-        console.log(`Bet of ${bet} placed successfully. Remaining balance: ${playerBalance}`);
     }
-
+    // check for blackjack
     if (isBlackjack(playerHand)) {
         winAudio.play();
         winColor();
-        console.log("blackjack");
         message.innerText = "Blackjack! You win!";
         gameOver = true;
         dealerBalance -= bet*2;
@@ -195,7 +181,6 @@ function drawCard(hand) {
     hand.push(card);
     // take card out of the deck
     deck.splice(randomIndex, 1);
-    console.log("card dealt ", card );
 }
 
 function calculateHand(hand) {
