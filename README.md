@@ -28,3 +28,4 @@ Once the player decides to "stand", the dealer will reveal their face-down card 
 - Make it look better
 - I want to be able to get a loan if playerBalance = 0 and continue playing.
 - I want to be able to go "All In"
+- fix bugs
